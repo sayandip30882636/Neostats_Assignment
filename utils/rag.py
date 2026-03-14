@@ -7,6 +7,10 @@ from models.embeddings import get_embeddings
 
 from chromadb.config import Settings
 
+# Silence noisy third-party logs that don't affect functionality
+logging.getLogger("chromadb").setLevel(logging.ERROR)
+logging.getLogger("sentence_transformers").setLevel(logging.ERROR)
+
 logger = logging.getLogger(__name__)
 
 DB_DIR = "chroma_db"
