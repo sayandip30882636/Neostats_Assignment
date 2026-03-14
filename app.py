@@ -6,7 +6,6 @@ from models.llm import get_llm
 from utils.rag import initialize_vector_db, retrieve_context
 from utils.search import perform_web_search
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_community.tools import DuckDuckGoSearchRun
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
@@ -225,8 +224,8 @@ def main():
                         search_results = ""
                         if enable_search and (not context or len(context.strip()) < 50):
                             st.toast("🔎 Searching the web for real-time info...", icon="🌐")
-                            logger.info("Context insufficient, falling back to web search.")
-                            search_results = perform_web_search(prompt + " PCAF GHG Protocol climate risk")
+                            logger.info(f"Fallback Search Query: {prompt}")
+                            search_results = perform_web_search(prompt)
                             if search_results:
                                 context += f"\\n\\nWeb Search Results:\\n{search_results}"
 

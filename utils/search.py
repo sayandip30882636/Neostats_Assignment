@@ -1,16 +1,19 @@
 import logging
-from langchain_community.utilities import DuckDuckGoSearchAPIWrapper
+from duckduckgo_search import DDGS
 
 logger = logging.getLogger(__name__)
 
 def perform_web_search(query):
     """
-    Performs a live web search using DuckDuckGo.
+    Performs a live web search using DuckDuckGo directly.
     """
     try:
-        wrapper = DuckDuckGoSearchAPIWrapper(region="wt-wt", time="y", max_results=3)
-        result = wrapper.run(query)
-        return result
+        with DDGS() as ddgs:
+            results = list(ddgs.text(query, max_results=3))
+            if results:
+                # Combine snippets from results
+                return "\n\n".join([f"Source: {r.get('href')}\nContent: {r.get('body')}" for r in results])
+            return ""
     except Exception as e:
-        logger.error(f"Error performing web search: {str(e)}")
-        return "Web search results are temporarily unavailable (possible rate limit)."
+        logger.error(f"Critical search error: {str(e)}")
+        return f"Error: {str(e)}"
