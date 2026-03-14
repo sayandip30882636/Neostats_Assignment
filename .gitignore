@@ -1,0 +1,28 @@
+# Virtual Environments
+venv/
+env/
+.env
+
+# Cache and Bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# IDE files
+.vscode/
+.idea/
+
+# Vector stores
+# Note: Since the app builds vectorstore from embeddings dynamically or accesses it,
+# it might not be strictly needed, but typically vector embeddings are big.
+# We will ignore it unless you pre-generated and need to push it.
+chroma_db/
+
+# Streamlit config (optional)
+.streamlit/
+
+# OS specific
+.DS_Store
+Thumbs.db
