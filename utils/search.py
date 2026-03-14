@@ -1,3 +1,4 @@
+import logging
 from langchain_community.tools import DuckDuckGoSearchRun
 
 logger = logging.getLogger(__name__)
