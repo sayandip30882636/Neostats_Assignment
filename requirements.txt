@@ -7,3 +7,4 @@ sentence-transformers==2.6.0
 python-dotenv==1.0.1
 duckduckgo-search==5.2.1
 pypdf==4.1.0
+wikipedia
